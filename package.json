@@ -1,0 +1,19 @@
+{
+  "name": "codeial",
+  "version": "1.0.0",
+  "description": "connecting socially using code",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "social",
+    "connect"
+  ],
+  "author": "Shashank",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.1"
+  }
+}
