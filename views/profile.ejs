@@ -1,2 +1,7 @@
 <link rel="stylesheet" href="/css/profile.css" />
 <h1>Welcome to Profile</h1>
+<h3><%= user.email %></h3>
+<h3><%= user.name %></h3>
+<form action="/users/signout" method="post">
+  <input type="submit" value="Sign Out" />
+</form>
