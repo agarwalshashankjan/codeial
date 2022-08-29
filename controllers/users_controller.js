@@ -33,11 +33,13 @@ module.exports.create = function (req, res) {
         if (err) {
           console.log("Error creating the user:, ", err);
           return;
+        } else {
+          return res.redirect("/users/signin");
         }
-        return res.redirect("/users/signin");
       });
+    } else {
+      return res.redirect("back");
     }
-    return res.redirect("back");
   });
 };
 
