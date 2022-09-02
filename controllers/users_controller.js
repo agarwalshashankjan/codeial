@@ -12,11 +12,15 @@ module.exports.posts = function (req, res) {
 };
 
 module.exports.signin = function (req, res) {
-  return res.render("user_sign_in", { title: "Signin" });
+  if (req.isAuthenticated()) {
+    return res.redirect("/users/profile");
+  } else return res.render("user_sign_in", { title: "Signin" });
 };
 
 module.exports.signup = function (req, res) {
-  return res.render("user_sign_up", { title: "Singup" });
+  if (req.isAuthenticated()) {
+    return res.redirect("/users/profile");
+  } else return res.render("user_sign_up", { title: "Singup" });
 };
 
 module.exports.create = function (req, res) {
@@ -44,5 +48,14 @@ module.exports.create = function (req, res) {
 };
 
 module.exports.createSession = function (req, res) {
-  // To DO
+  return res.redirect("/users/profile");
+};
+
+module.exports.destroySession = function (req, res) {
+  req.logout(function (err) {
+    if (err) {
+      return next(err);
+    }
+    res.redirect("/");
+  });
 };
