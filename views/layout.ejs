@@ -4,6 +4,14 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/noty/3.2.0-beta/noty.min.css"
+    />
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/noty/3.2.0-beta/noty.min.js"
+    ></script>
     <link rel="stylesheet" href="/css/layout.css" />
     <%- style %>
     <title><%= title %></title>
@@ -11,5 +19,26 @@
   <body>
     <%- include('_header'); %> <%- body %> <%- include('_footer'); %><%- script
     %>
+
+    <script>
+      <% if(flash.success && flash.success.length >0){%>
+        new Noty({
+          text: "<%= flash.success %>",
+          type: 'alert',
+          layout: "topRight",
+          theme: "mint",
+          timeout: 1000,
+        }).show();
+        <% } %>
+        <% if(flash.error && flash.error.length >0){%>
+        new Noty({
+          text: "<%= flash.error %>",
+          type: 'error',
+          layout: "topRight",
+          theme: "relax",
+          timeout: 1000,
+        }).show();
+        <% } %>
+    </script>
   </body>
 </html>

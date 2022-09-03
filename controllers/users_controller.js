@@ -40,10 +40,12 @@ module.exports.create = async function (req, res) {
 };
 
 module.exports.createSession = function (req, res) {
+  req.flash("success", "Logged in Successfully");
   return res.redirect("/users/profile");
 };
 
 module.exports.destroySession = function (req, res) {
+  req.flash("success", "Logged Out Successfully");
   req.logout(function (err) {
     if (err) {
       return next(err);

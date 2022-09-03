@@ -8,6 +8,8 @@ const session = require("express-session");
 const passport = require("passport");
 const passportLocal = require("./config/passport-local");
 const mongoStore = require("connect-mongodb-session")(session);
+const flash = require("connect-flash");
+const customMWare = require("./config/middleware");
 
 app.use(expressLayouts);
 app.use(cookieParser());
@@ -42,6 +44,8 @@ app.use(
 
 app.use(passport.initialize());
 app.use(passport.session());
+app.use(flash());
+app.use(customMWare.setFlash);
 app.use(passport.setAuthenticatedUser);
 app.use("/", require("./routes"));
 app.listen(port, function (error) {
