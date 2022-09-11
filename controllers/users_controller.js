@@ -31,7 +31,22 @@ module.exports.create = async function (req, res) {
   let user = await User.findOne({ email: req.body.email });
 
   if (!user) {
-    await User.create(req.body);
+    user = {};
+    User.uploadAvatar(req, res, async function (err) {
+      console.log(req.body);
+      if (err) {
+        console.log("***********Multer Error*********************", err);
+      } else {
+        user.name = req.body.name;
+        user.email = req.body.email;
+        user.password = req.body.password;
+        // console.log("Body*********************", req.file.file);
+        if (req.file) {
+          user.avatar = User.avatarPath + "/" + req.file.filename;
+        }
+        await User.create(user);
+      }
+    });
 
     return res.redirect("/users/signin");
   } else {
