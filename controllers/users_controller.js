@@ -1,4 +1,6 @@
 const User = require("../models/user");
+const signinMailer = require("../mailers/singin_mailer");
+
 module.exports.profile = function (req, res) {
   return res.render("profile", {
     title: "Profile",
@@ -13,7 +15,7 @@ module.exports.posts = function (req, res) {
 
 module.exports.signin = function (req, res) {
   if (req.isAuthenticated()) {
-    return res.redirect("/users/profile");
+    return res.redirect("/user/profile");
   } else return res.render("user_sign_in", { title: "Signin" });
 };
 
@@ -55,6 +57,8 @@ module.exports.create = async function (req, res) {
 };
 
 module.exports.createSession = function (req, res) {
+  console.log(req.user.email, req.user.name);
+  signinMailer.signin(req.user);
   req.flash("success", "Logged in Successfully");
   return res.redirect("/users/profile");
 };
